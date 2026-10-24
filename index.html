@@ -73,8 +73,10 @@ img.frame{z-index:4;user-select:none;-webkit-user-drag:none}
 .w-sub{margin:0;font:clamp(.7rem,1.9vw,.85rem)/1.6 var(--kufi);letter-spacing:.28em;text-transform:uppercase;color:rgba(83,110,110,.8)}
 .hint{position:absolute;z-index:5;left:50%;bottom:calc(100*var(--lvh) - 100*var(--svh) + 46px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
   display:grid;justify-items:center;gap:8px;font:11px/1 var(--kufi);letter-spacing:.3em;text-transform:uppercase;color:var(--sage)}
-.hint i{width:1px;height:34px;background:linear-gradient(var(--gold),transparent);transform-origin:top;animation:drip 1.9s ease-in-out infinite}
-@keyframes drip{0%{transform:scaleY(0);opacity:1}70%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+.hint-label{padding:.45em .75em;border:1px solid rgba(184,137,58,.45);border-radius:999px;background:rgba(253,252,238,.94);color:var(--deep);box-shadow:0 4px 16px rgba(47,70,70,.12);letter-spacing:.2em}
+.hint .mouse{position:relative;width:18px;height:29px;border:1px solid var(--gold);border-radius:999px;background:rgba(253,252,238,.65)}
+.hint .mouse:after{position:absolute;top:5px;left:50%;width:3px;height:5px;border-radius:999px;background:var(--gold);content:"";transform:translateX(-50%);animation:scroll-cue 1.35s ease-in-out infinite}
+@keyframes scroll-cue{0%{transform:translate(-50%,0);opacity:0}20%{opacity:1}75%{transform:translate(-50%,10px);opacity:1}100%{transform:translate(-50%,10px);opacity:0}}
 .static .welcome .ch,.static .welcome .rest{opacity:1}
 .static .scene{height:auto;min-height:100vh}
 .static .hint{display:none}
@@ -90,10 +92,12 @@ img.frame{z-index:4;user-select:none;-webkit-user-drag:none}
 .card .of{margin:0;font:italic 400 clamp(.9rem,min(3.4vw,2.4vh),1.1rem)/1.3 var(--serif)}
 .card .par{margin:2px auto 6px;max-width:min(92vw,760px);font:600 clamp(.95rem,min(4vw,2.8vh),1.35rem)/1.25 var(--serif);color:var(--deep);overflow-wrap:anywhere}
 .card .nm{margin:0 auto;max-width:92vw;font:400 clamp(1.9rem,min(9vw,6.4vh),3.6rem)/1.15 var(--ruqaa);color:var(--sage);overflow-wrap:anywhere}
-.card .hum{margin:0;font:400 clamp(2.6rem,min(12vw,9vh),4.4rem)/1.2 var(--ruqaa);color:var(--gold)}
-.card .hum-t{margin:2px 0 0;font:italic 400 clamp(.95rem,min(3.6vw,2.6vh),1.2rem)/1.3 var(--serif)}
+.card .hum{margin:0;font:400 clamp(1.75rem,8vw,3rem)/1.05 var(--ruqaa);color:var(--gold)}
+.card .hum-t{margin:0;font:italic 400 clamp(.82rem,3.2vw,1rem)/1.2 var(--serif)}
 .card.plain{background:none}
-.card.plain#c-hum{top:auto;bottom:clamp(24px,7vh,64px);left:0;right:0;width:fit-content;max-width:calc(100% - 32px);margin:0 auto;padding:10px 24px 12px;
+.card.plain#c-intro .lbl{display:inline-block;margin:0 auto 8px;padding:.55em .9em;border:1px solid rgba(184,137,58,.55);border-radius:999px;background:var(--cream);box-shadow:0 5px 20px rgba(47,70,70,.12);color:#9a681f;font-size:clamp(.8rem,2.2vw,1.05rem);letter-spacing:.2em}
+.card.plain#c-intro .intro-title{background:linear-gradient(105deg,#8c5e1e 0%,#bd852a 24%,#f2d789 46%,#b77a20 64%,#f5df9b 82%,#95631e 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.card.plain#c-hum{top:auto;bottom:clamp(16px,4vh,36px);left:0;right:0;width:fit-content;max-width:calc(100% - 24px);margin:0 auto;padding:6px clamp(14px,4vw,22px) 8px;
   border:1px solid rgba(184,137,58,.55);border-radius:999px;background:rgba(253,252,238,.94);box-shadow:0 8px 28px rgba(47,70,70,.2);backdrop-filter:blur(6px)}
 .card .hum{color:var(--deep);line-height:1.05}
 .card .hum-t{color:var(--deep)}
@@ -152,6 +156,11 @@ dialog .col{display:grid;gap:10px}
 .mem .ph img{filter:grayscale(.35) sepia(.2)}
 .mem figcaption{font:600 1.25rem/1.25 var(--serif);color:var(--cream)}
 .mem small{display:block;font:11px var(--kufi);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-hi);margin-bottom:2px}
+.w-ar,.card .lbl,.card .hum,.eyebrow,.ar,.mem small{color:#8a5b16}
+@supports (-webkit-background-clip:text){
+  .w-ar,.card .lbl,.card .hum,.eyebrow,.ar,.mem small{background-image:linear-gradient(105deg,#805216 0%,#9b671b 26%,#b27d29 48%,#8a5b16 68%,#a87525 84%,#805216 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .dark .eyebrow,.dark .ar,.dark .mem small{color:#f1d58e;background-image:linear-gradient(105deg,#e9cb7b 0%,#f5e4b0 28%,#d5a644 50%,#f7e8bb 72%,#dfbd68 100%)}
+}
 
 /* sound */
 #snd{position:fixed;z-index:50;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:rgba(253,252,238,.9);color:var(--sage);display:grid;place-content:center;cursor:pointer;backdrop-filter:blur(6px)}
@@ -161,7 +170,7 @@ dialog .col{display:grid;gap:10px}
 .rv{will-change:transform,opacity}
 .static .rv{opacity:1!important;transform:none!important}
 footer{padding:26px 24px calc(30px + env(safe-area-inset-bottom,0px));text-align:center;font:11px/1.6 var(--kufi);letter-spacing:.22em;text-transform:uppercase;color:var(--sage);opacity:.7}
-@media (prefers-reduced-motion:reduce){.hint i,.orn{animation:none}}
+@media (prefers-reduced-motion:reduce){.hint .mouse:after,.orn{animation:none}}
 </style>
 </head>
 <body>
@@ -192,7 +201,7 @@ footer{padding:26px 24px calc(30px + env(safe-area-inset-bottom,0px));text-align
     <svg class="w-div rest" viewBox="0 0 220 24" aria-hidden="true"><line x1="0" y1="12" x2="86" y2="12" stroke="#d6a64a" stroke-width="1.2"/><line x1="134" y1="12" x2="220" y2="12" stroke="#d6a64a" stroke-width="1.2"/><rect x="99" y="1" width="22" height="22" fill="none" stroke="#b8893a" stroke-width="1.4"/><rect x="99" y="1" width="22" height="22" fill="none" stroke="#b8893a" stroke-width="1.4" transform="rotate(45 110 12)"/></svg>
     <p class="w-sub rest">The doors are open. Please, come in.</p>
   </section>
-  <div class="hint" id="hint"><span>Scroll</span><i></i></div>
+  <div class="hint" id="hint"><span class="hint-label">Scroll to explore</span><span class="mouse" aria-hidden="true"></span></div>
 </main>
 
 <!-- 2 · BLESSING -->
@@ -220,7 +229,7 @@ footer{padding:26px 24px calc(30px + env(safe-area-inset-bottom,0px));text-align
       <p class="nm" data-k="brideName"></p>
     </div>
     <div class="card plain" id="c-intro">
-      <p class="lbl">Two families, one beautiful beginning</p>
+      <p class="lbl"><span class="intro-title">Two families, one beautiful beginning</span></p>
       <p class="of">Scroll to meet them</p>
     </div>
     <div class="card plain" id="c-hum">
@@ -475,11 +484,12 @@ var CONFIG = {
   function geom() {
     var sw = fam.offsetWidth, sh = fam.offsetHeight;
     var nw = famImg.naturalWidth || 1792, nh = famImg.naturalHeight || 2190;
-    var b = Math.min(sw / nw, sh / nh), bw = nw * b, bh = nh * b;     // "contain": the whole picture fits
+    var b = nh > nw ? Math.max(sw / nw, sh / nh) : Math.min(sw / nw, sh / nh);
+    var bw = nw * b, bh = nh * b;
     cam.style.width = bw + 'px'; cam.style.height = bh + 'px';
     return { sw: sw, sh: sh, bw: bw, bh: bh, f: (nh > nw ? FOCUS.portrait : FOCUS.landscape) };
   }
-  function whole() { var g = geom(); return { x: (g.sw - g.bw) / 2, y: g.sh - g.bh, scale: 1 }; }   // sits on the bottom, cream above for text
+  function whole() { var g = geom(); return { x: (g.sw - g.bw) / 2, y: g.sh - g.bh, scale: 1 }; }
   function zoomTo(i) {
     var g = geom(), s = Math.max(g.sw / g.bw, g.sh / g.bh) * g.f.extra, W = g.bw * s, H = g.bh * s;
     var ch = Math.max($('#c-bride').offsetHeight, $('#c-groom').offsetHeight) * 0.8;   // name card height: centre the couple in the space below it
@@ -514,19 +524,19 @@ var CONFIG = {
     }
   });
   ft
-    .to({}, { duration: 1.2 }, 0)                         // 0–1.2  whole picture
+    .to({}, { duration: 1.2 }, 0)                         // Let the title read before revealing the photo
     .to('#c-intro', cardOut, 1.0)
-    .to(cam, camTo(toBride), 1.2)                         // zoom in to the bride
-    .to('#c-bride', cardIn, 2.6)
-    .to('#c-bride', cardOut, 4.4)
-    .to(cam, camTo(whole), 4.6)                           // zoom out to the whole picture
-    .to('#c-hum', cardIn, 5.9)
-    .to('#c-hum', cardOut, 7.2)
-    .to(cam, camTo(toGroom), 7.4)                         // zoom in to the groom
-    .to('#c-groom', cardIn, 8.8)
-    .to('#c-groom', cardOut, 10.6)
-    .to(cam, camTo(whole), 10.6)                          // zoom back out, then confetti, then unpin
-    .to({}, { duration: 1.2 }, 12.5);
+    .to(cam, camTo(toBride), 2.2)                         // zoom in to the bride
+    .to('#c-bride', cardIn, 3.6)
+    .to('#c-bride', cardOut, 5.4)
+    .to(cam, camTo(whole), 5.6)                           // zoom out to the whole picture
+    .to('#c-hum', cardIn, 6.9)
+    .to('#c-hum', cardOut, 8.2)
+    .to(cam, camTo(toGroom), 8.4)                         // zoom in to the groom
+    .to('#c-groom', cardIn, 9.8)
+    .to('#c-groom', cardOut, 11.6)
+    .to(cam, camTo(whole), 11.6)                          // zoom back out, then confetti, then unpin
+    .to({}, { duration: 1.2 }, 13.5);
   ScrollTrigger.addEventListener('refreshInit', function () { gsap.set(cam, whole()); });
   famImg.addEventListener('load', function () { ScrollTrigger.refresh(); });
 
